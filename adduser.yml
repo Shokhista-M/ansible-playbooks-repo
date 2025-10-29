@@ -1,0 +1,19 @@
+---
+- name: Playbook for create users
+  hosts: all
+  become: true
+  vars_files:
+    - vault.yml
+  tasks:
+    - name: Create user george
+      ansible.builtin.user:
+        name: george
+        home: /home/george
+        shell: /bin/bash
+        create_home: yes
+        state: present
+    - name: Change george password
+      ansible.builtin.user:
+        name: george
+        update_password: always
+        password: "{{ newpassword | password_hash('sha512') }}"    
