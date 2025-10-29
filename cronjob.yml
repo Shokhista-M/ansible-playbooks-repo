@@ -1,0 +1,14 @@
+---
+- name: Create a cron job
+  hosts: all
+  tasks:
+    - name: schedule cron
+      cron:
+        name: This is schedule by ansible
+        minute: "0"
+        hour: "10"
+        day: "*"
+        month: "*"
+        weekday: "4"
+        user: root
+        job: "/root/cfile.sh"
